@@ -140,6 +140,12 @@ def estado_caducidad(fecha_expiracion):
         return "SIN_FECHA"
 
     ahora = datetime.now()
+    if isinstance(fecha_expiracion, str):
+        try:
+            fecha_expiracion = datetime.fromisoformat(fecha_expiracion)
+        except ValueError:
+            return "SIN_FECHA"
+
     dias_restantes = (fecha_expiracion - ahora).days
 
     if dias_restantes < 0:
